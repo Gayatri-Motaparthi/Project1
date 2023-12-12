@@ -1,0 +1,38 @@
+{% include "layout.html" %}
+
+<style>
+table{border: 1px solid;
+        width: 100%;
+        margin-top: 20px;} 
+
+th,td,tr{border: 1px solid;
+    text-align: left;
+        padding: 8px;}
+  </style>
+
+<table>
+    <thead>
+        <tr>
+            <th> No.</th>
+            <th> List Name </th>
+            <th> Update </th>
+            <th> Delete </th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        {% for list_name in lists %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ list_name['list_name'] }} </td>
+            <td> <form method="POST" action="{{ url_for('display_full_list') }}">
+                <input type="hidden" name="in" value="{{ list_name['list_name'] }}">
+                <input type="submit" value="Update" style="margin-right: 10px;"></form></td>
+            <td><form method="POST" action="{{ url_for('delete_list') }}">
+                <input type="hidden" name="ln" value="{{ list_name['list_name'] }}">
+                <button type="submit" class="btn">Delete</button></form></td>
+        </tr>
+        {% endfor %}
+    
+    </tbody>
+</table>

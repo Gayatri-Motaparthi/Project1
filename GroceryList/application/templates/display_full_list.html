@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block content%}
+
+<h1>{{list_name}}</h1>
+<style>
+    table {
+        border: 1px solid;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th,
+    td,
+    tr {
+        border: 1px solid;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th> No.</th>
+            <th> Item Name</th>
+            <th> Quantity </th>
+            <th> Kgs </th>
+            <th> Update </th>
+            <th> Delete </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for item in selected_list %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item['item_name'] }}</td>
+            <td>
+                <p>{{ item['quantity'] }}</p>
+            </td>
+            <td>
+                <p>{{ item['kgs'] }}</p>
+            </td>
+            <td>
+                <a href="{{ url_for('update_item' , index_number = loop.index) }}"><input type="button" value="Update"
+                        style="margin-right: 20px;"></a>
+            </td>
+            <td>
+                <form method="POST" action="{{ url_for('delete_item')}}">
+                    <input type="hidden" name="li" value="{{ loop.index }}">
+                    <button type="submit" class="btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+<form action="{{url_for('add_item')}}" method="POST">
+    <p><a href="{{ url_for('add_item') }}"><input type="button" value="Add Item" style="margin-right: 20px;"></a> </p>
+
+
+</form>
+
+{% endblock content%}

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<script>
+    Swal.fire({
+        title: "{{ category.title() }}!",
+        text: "{{ message }}",
+        icon: "{{ category }}",
+        closeOnConfirm: false
+    })
+</script>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<form action="{{url_for('add_list')}}" method="POST">
+    <p> List Name: <input type="text" name="ln" required></p>
+    <p><input type="submit" value="Create"></a></p>
+    </p>
+
+</form>
+{% endblock %}

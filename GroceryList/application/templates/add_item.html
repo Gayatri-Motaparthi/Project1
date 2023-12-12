@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<script>
+    Swal.fire({
+        title: "{{ category.title() }}!",
+        text: "{{ message }}",
+        icon: "{{ category }}",
+        closeOnConfirm: false
+    })
+</script>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<form action="{{url_for('add_item')}}" method="POST">
+    <p> Item Name: <input type="text" name="in" required></p>
+    <p> Quantity: <input type="number" name="q" required min="1"></p>
+    <p> KGs/Litres: <input type="text" name="k"></p>
+    <p><input type="submit" value="add" style="margin-right: 20px;"></a> <a
+            href="{{ url_for('display_full_list') }}"><input type="button" value="done"></a></p>
+    </p>
+
+</form>
+{% endblock %}

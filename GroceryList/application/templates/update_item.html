@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<p> Item Name: {{item_to_edit["item_name"]}}</p>
+<form action="{{url_for('update_item', index_number = index_number)}}" method="POST">
+    <p> Quantity: <input type="number" name="q" required min="1"></p>
+    <p> KGs/Litres: <input type="number" name="k"></p>
+
+
+    <p><input type="submit" value="Save">
+    </p>
+
+</form>
+{% endblock %}
